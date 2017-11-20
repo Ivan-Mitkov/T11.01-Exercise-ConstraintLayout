@@ -30,15 +30,50 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewPassengerLabel"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@color/colorPrimary"/>
+
+    <ImageView
+        android:id="@+id/rightRectangle"
+        android:layout_width="60dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="32dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPassengerName"
+        app:srcCompat="@drawable/shape_rectangle_stroke" />
+
+    <ImageView
+        android:id="@+id/leftRectangle"
+        android:layout_width="60dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPassengerName"
+        app:srcCompat="@drawable/shape_rectangle_stroke" />
+
+    <ImageView
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorPrimaryLight"
+        app:layout_constraintBottom_toBottomOf="@+id/rightRectangle"
+        app:layout_constraintEnd_toStartOf="@+id/leftRectangle"
+        app:layout_constraintStart_toEndOf="@+id/rightRectangle"
+        app:layout_constraintTop_toTopOf="@+id/rightRectangle"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:srcCompat="@android:drawable/divider_horizontal_dark" />
     <!--  (3) Create a TextView for the Passenger label and name -->
     <!--  (4) Use tool:text to set the text value -->
 
-    <!-- TODO (5) Create an ImageView for the left rectangle -->
-    <!-- TODO (6) Set the background to the shape_rectangle_stroke drawable -->
+    <!--  (5) Create an ImageView for the left rectangle -->
+    <!--  (6) Set the background to the shape_rectangle_stroke drawable -->
 
-    <!-- TODO (7) Create an ImageView for the divider -->
+    <!--  (7) Create an ImageView for the divider -->
 
-    <!-- TODO (8) Create an ImageView for the rightRectangle -->
+    <!--  (8) Create an ImageView for the rightRectangle -->
 
     <!-- TODO (9) Create a TextView for the origin code, the destination code and the flight code -->
 
