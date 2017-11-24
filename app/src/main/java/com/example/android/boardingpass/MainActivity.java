@@ -16,15 +16,63 @@ package com.example.android.boardingpass;
 * limitations under the License.
 */
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.android.boardingpass.databinding.ActivityMainBinding;
+import com.example.android.boardingpass.utilities.FakeDataUtils;
+
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
+
 public class MainActivity extends AppCompatActivity {
 
+    //(3) Create a data binding instance called mBinding of type ActivityMainBinding
+    ActivityMainBinding mBinding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
+        //  (4) Set the Content View using DataBindingUtil to the activity_main layout
+        mBinding= DataBindingUtil.setContentView(this,R.layout.activity_main);
+        // (5) Load a BoardingPassInfo object with fake data using FakeDataUtils
+        BoardingPassInfo fakeBoardingPass= FakeDataUtils.generateFakeBoardingPassInfo();
+        // (9) Call displayBoardingPassInfo and pass the fake BoardingInfo instance
+        displayBoardingPassInfo(fakeBoardingPass);
     }
 
+    private void displayBoardingPassInfo(BoardingPassInfo info) {
+        // (6) Use mBinding to set the Text in all the textViews using the data in info
+        mBinding.textViewPassengerName.setText(info.passengerName);
+        mBinding.textViewFlightNumber.setText(info.flightCode);
+        mBinding.textViewOrigin.setText(info.originCode);
+        mBinding.textViewDetination.setText(info.destCode);
+
+        //  (7) Use a SimpleDateFormat formatter to set the formatted value in time text views
+        SimpleDateFormat formater=new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
+        String boardingTime = formater.format(info.boardingTime);
+        String departureTime = formater.format(info.departureTime);
+        String arrivalTime = formater.format(info.arrivalTime);
+
+        mBinding.boardingTimeTV.setText(boardingTime);
+        mBinding.departureTime.setText(departureTime);
+        mBinding.arrivalTimeTv.setText(arrivalTime);
+
+        // (8) Use TimeUnit methods to format the total minutes until boarding
+        long totalMinutesTillBoarding = info.getMinutesUntilBoarding();
+        long hoursTillBoarding = TimeUnit.MINUTES.toHours(totalMinutesTillBoarding);
+        long minutesLessHoursTillBoarding =
+                totalMinutesTillBoarding-TimeUnit.HOURS.toMinutes(hoursTillBoarding);
+        String hoursAndMinutesTillBoarding =
+                getString(R.string.countDownFormat,hoursTillBoarding,minutesLessHoursTillBoarding);
+        mBinding.boardingInTime.setText(hoursAndMinutesTillBoarding);
+
+        mBinding.textViewTerminal.setText(info.departureTerminal);
+        mBinding.textViewGate.setText(info.departureGate);
+        mBinding.textViewSeat.setText(info.seatNumber);
+
+    }
 }
+
